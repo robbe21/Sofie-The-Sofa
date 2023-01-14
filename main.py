@@ -8,16 +8,8 @@ import time
 r = sr.Recognizer()
 mic = sr.Microphone()
 test = sr.AudioFile('test.flac')
-print("Start talking")
-with mic as source:
-    audio = r.listen(source)
-
-result = r.recognize_google(audio)
 
 
-print(result)
-
-##    ## 
 
 ## Hey isabel hier kan je dingentjes aanpassen#
 
@@ -50,6 +42,16 @@ myobj.save("welcome.mp3")
 os.system("mpg321 welcome.mp3")
 # print("KOM OP MIJ ZITTEN")
 # exit()
+
+print("Start talking")
+with mic as source:
+    audio = r.listen(source)
+
+result = r.recognize_google(audio)
+
+print(result)
+
+
 openai.api_key = "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"
 
 response = openai.Completion.create(model="text-davinci-003", prompt="You are a chair you are made from wool and your creators name is Isabel Brems. please answer this: " + result + "?", temperature=0, max_tokens=4097 - (result.__len__()+20))
